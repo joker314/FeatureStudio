@@ -1,0 +1,26 @@
+{
+	"manifest_version": 2,
+	"name": "Studio for Featuring Projects",
+	"description": "Allows curators of a particular studio on Scratch to have an easier way to manage project requests.",
+	"content_scripts": [
+		{
+			"matches": [  
+				"https://scratch.mit.edu/*"
+			],
+			"css":[
+				"styles.css"
+			],
+			"js":[  
+				"code.js"
+			]
+		}
+	],
+	"version": "1.0",
+	"background": {
+		"scripts": ["menu.js"]
+	},
+	"permissions": [
+		"https://scratch.mit.edu/*",
+		"contextMenus"
+	]
+}
