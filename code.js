@@ -9,7 +9,6 @@ document.addEventListener("contextmenu", function(e) {
 chrome.runtime.onMessage.addListener(function(req, sender, reply) {
 	switch(req.msg) {
 		case "STARTING":
-			console.log(projectLink);
 			reply({
 				author: projectLink.find(el => el.className === "info").children[0].textContent.trim(),
 				elID: pastLinks.push(projectLink[0]) - 1

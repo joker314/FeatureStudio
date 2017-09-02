@@ -9,7 +9,6 @@ chrome.contextMenus.removeAll(function() {
 			
 			if(project) {
 				chrome.tabs.sendMessage(tab.id, {msg: "STARTING", content: ""}, function(resp) {
-					console.log(resp);
 					const api = new XMLHttpRequest();
 					
 					api.open("GET", `https://scratch.mit.edu/api/v1/project/${project}/`);
