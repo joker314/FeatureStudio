@@ -3,7 +3,10 @@ let projectLink = null;
 let pastLinks = [];
 
 document.addEventListener("contextmenu", function(e) {
-	projectLink = Array.from(e.path);
+	projectLink = [e.target];
+	while(projectLink[projectLink.length - 1].parentElement) {
+		projectLink.push(projectLink[projectLink.length - 1].parentElement);
+	}
 });
 
 chrome.runtime.onMessage.addListener(function(req, sender, reply) {
