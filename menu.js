@@ -8,7 +8,8 @@ chrome.contextMenus.removeAll(function() {
 			const project = Number(info.linkUrl.replace(/https?:\/\/scratch\.mit\.edu\/projects\/(\d+).*/i, "$1"));
 			
 			if(project) {
-				chrome.tabs.sendMessage(tab.id, {msg: "STARTING", content: ""}, function(author, elID) {
+				chrome.tabs.sendMessage(tab.id, {msg: "STARTING", content: ""}, function(resp) {
+					console.log(resp);
 					const api = new XMLHttpRequest();
 					
 					api.open("GET", `https://scratch.mit.edu/api/v1/project/${project}/`);
@@ -16,12 +17,12 @@ chrome.contextMenus.removeAll(function() {
 						if(api.readyState === 4) {
 							if(api.status === 200) {
 								const data = JSON.parse(api.responseText);
-								if(data.creator.username === author) {
-									chrome.tabs.sendMessage(tab.id, {msg: "BAD", content: "AUTHOR", elID});
+								if(data.creator.username === resp.author) {
+									chrome.tabs.sendMessage(tab.id, {msg: "BAD", content: "AUTHOR", elID: resp.elID});
 								} else if (Number(data.love_count) > 100) {
-									chrome.tabs.sendMessage(tab.id, {msg: "BAD", content: "LOVED", elID});
+									chrome.tabs.sendMessage(tab.id, {msg: "BAD", content: "LOVED", elID: resp.elID});
 								} else {
-									chrome.tabs.sendMessage(tab.id, {msg: "GOOD", content: "", elID});
+									chrome.tabs.sendMessage(tab.id, {msg: "GOOD", content: "", elID: resp.elID});
 								}
 							} else {
 								// NFE or ProjectNotFound
@@ -31,11 +32,11 @@ chrome.contextMenus.removeAll(function() {
 								normal.onreadystatechange = function() {
 									if(normal.readyState === 4) {
 										if(normal.status === 200) {
-											chrome.tabs.sendMessage(tab.id, {msg: "BAD", content: "NFE", elID});
+											chrome.tabs.sendMessage(tab.id, {msg: "BAD", content: "NFE", elID: resp.elID});
 										} else if (normal.status === 404) {
-											chrome.tabs.sendMessage(tab.id, {msg: "NEUTRAL", content: "UNSHARED", elID});
+											chrome.tabs.sendMessage(tab.id, {msg: "BAD", content: "UNSHARED", elID: resp.elID});
 										} else {
-											chrome.tabs.sendMessage(tab.id, {msg: "NEUTRAL", content: "ERROR", elID});
+											chrome.tabs.sendMessage(tab.id, {msg: "NEUTRAL", content: "ERROR", elID: resp.elID});
 										}
 									}
 								}

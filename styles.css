@@ -1,0 +1,39 @@
+.circle {
+    border-radius: 50%;
+    padding: 4px;
+    display: inline-block;
+    margin-bottom: 1px;
+    margin-left: 3px;
+	margin-right: 3px;
+	background-color: orange;
+}
+
+/* Colours begin here */
+
+.circle.grey {
+	background-color: grey;
+}
+.circle-after.grey {
+	color: grey;
+}
+
+.circle.orange {
+	background-color: orange;
+}
+.circle-after.orange {
+	color: orange;
+}
+
+.circle.red {
+	background-color: red;
+}
+.circle-after.red {
+	color: red;
+}
+
+.circle.green {
+	background-color: green;
+}
+.circle-after.green {
+	color: green;
+}
