@@ -48,3 +48,7 @@ chrome.contextMenus.removeAll(function() {
 		}
 	});
 });
+
+chrome.browserAction.onClicked.addListener(function() {
+	chrome.tabs.create({url: "https://scratch.mit.edu/studios/4228481/comments/"});
+});
