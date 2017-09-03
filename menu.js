@@ -38,7 +38,8 @@ chrome.contextMenus.removeAll(function() {
 											chrome.tabs.sendMessage(tab.id, {msg: "NEUTRAL", content: "ERROR", elID: resp.elID});
 										}
 									}
-								}
+								};
+								normal.send();
 							}
 						}
 					};
